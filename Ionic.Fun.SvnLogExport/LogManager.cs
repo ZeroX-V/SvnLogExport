@@ -54,7 +54,7 @@ namespace Ionic.Fun.SvnLogExport
                 {
 
                     //后续操作，可以获取作者，版本号，提交时间，提交的message和提交文件列表等信息
-                    foreach (var log in logs.Where(x=>x.Author==Config.UserName&& !string.IsNullOrEmpty(x.LogMessage)).OrderByDescending(x => x.Time))
+                    foreach (var log in logs.Where(x=>x.Author==Config.UserName&& !string.IsNullOrEmpty(x.LogMessage)))
                     {
                             result.Add(new Model.MessageModel
                             {
@@ -67,7 +67,7 @@ namespace Ionic.Fun.SvnLogExport
                 }
             }
 
-            return result;
+            return result.OrderByDescending(x => x.SubmitTime).ToList();
 
 
         }
