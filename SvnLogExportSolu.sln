@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ionic.Fun.SvnLogExport", "I
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTest", "ConsoleTest\ConsoleTest.csproj", "{6EA829AE-858C-4F30-A6C9-7057E94F3515}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ionic.Fun.SvnLogExport.UI", "Ionic.Fun.SvnLogExport.UI\Ionic.Fun.SvnLogExport.UI.csproj", "{2DA55119-4127-4545-82F2-5D4FD63F4D12}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,14 @@ Global
 		{6EA829AE-858C-4F30-A6C9-7057E94F3515}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6EA829AE-858C-4F30-A6C9-7057E94F3515}.Release|x64.ActiveCfg = Release|Any CPU
 		{6EA829AE-858C-4F30-A6C9-7057E94F3515}.Release|x64.Build.0 = Release|Any CPU
+		{2DA55119-4127-4545-82F2-5D4FD63F4D12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DA55119-4127-4545-82F2-5D4FD63F4D12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DA55119-4127-4545-82F2-5D4FD63F4D12}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{2DA55119-4127-4545-82F2-5D4FD63F4D12}.Debug|x64.Build.0 = Debug|Any CPU
+		{2DA55119-4127-4545-82F2-5D4FD63F4D12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DA55119-4127-4545-82F2-5D4FD63F4D12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DA55119-4127-4545-82F2-5D4FD63F4D12}.Release|x64.ActiveCfg = Release|Any CPU
+		{2DA55119-4127-4545-82F2-5D4FD63F4D12}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

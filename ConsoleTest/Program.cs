@@ -13,19 +13,19 @@ namespace ConsoleTest
         {
             Config.UserName = "svn账号";
             Config.Password = "svn密码";
-            Config.Repositories = new List<Model.RepositoriesModel>() {
-                new Model.RepositoriesModel{
-                    Name="项目1",
-                    Url="https://192.168.0.11/svn/xxx/trunk"
-                },
-                  new Model.RepositoriesModel{
-                    Name="项目1",
-                    Url="https://192.168.0.11/svn/xxx/trunk"
-                }
-
-            };
+           
             LogManager manager = new LogManager();
-            var text = manager.GetCommitLog(Convert.ToDateTime("2019-02-11"), DateTime.Now).LogToText();
+
+           //查找本地svn项目
+           // Config.Repositories =manager.FindLocalRepositories(@"F:\ProjectCode\SVNProject\SingleCode");
+
+           //保存项目地址到文件
+           // manager.SaveRepositoriesToFile(Config.Repositories);
+
+            //从配置文件中读取
+            Config.Repositories = manager.LoadRepositoriesToFile();
+          
+            var text = manager.GetCommitLog(Convert.ToDateTime("2018-02-11"), DateTime.Now).LogToText();
             Console.WriteLine(text);
             Console.ReadKey();
         }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,9 +28,14 @@ namespace Ionic.Fun.SvnLogExport
                     sb.AppendLine("");
                     nowName = item.Repositories.Name;
                 }
-                sb.AppendLine(item.Message);
+                sb.AppendLine($"{item.Message}");
             }
             return sb.ToString();
+        }
+
+        public static void SaveToFile(this object obj,string  savePath) {
+            var json= JsonConvert.SerializeObject(obj, Formatting.Indented);
+            FileHelper.Write(savePath,json);
         }
     }
 }

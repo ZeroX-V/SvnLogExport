@@ -8,6 +8,8 @@ namespace Ionic.Fun.SvnLogExport
 {
     public class Model
     {
+       
+
         public class MessageModel
         {
             public string UserName { get; set; }
@@ -22,8 +24,11 @@ namespace Ionic.Fun.SvnLogExport
         {
             public string Name { get; set; }
             public string Url { get; set; }
+          
 
         }
+
+
 
     }
 
