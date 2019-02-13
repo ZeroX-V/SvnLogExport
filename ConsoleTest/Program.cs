@@ -17,7 +17,7 @@ namespace ConsoleTest
             LogManager manager = new LogManager();
 
             //查找本地svn项目
-            //manager.FindLocalRepositories(@"F:\ProjectCode\SVNProject\SingleCode");
+            //manager.FindLocalRepositories(@"F:\ProjectCode\SVNProject");
 
             //保存仓储地址到文件
             // manager.SaveRepositoriesToFile(Config.Repositories);
