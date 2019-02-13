@@ -15,16 +15,18 @@ namespace ConsoleTest
             Config.Password = "svn密码";
             Config.Repositories = new List<Model.RepositoriesModel>() {
                 new Model.RepositoriesModel{
-                    Name="别名",
-                    Url="svn 远程地址"
+                    Name="项目1",
+                    Url="https://192.168.0.11/svn/xxx/trunk"
+                },
+                  new Model.RepositoriesModel{
+                    Name="项目1",
+                    Url="https://192.168.0.11/svn/xxx/trunk"
                 }
+
             };
             LogManager manager = new LogManager();
-            var list=  manager.GetCommitLog(Convert.ToDateTime("2018-12-01"),DateTime.Now);
-            foreach (var item in list)
-            {
-                Console.WriteLine($"{item.Repositories.Name}   {item.UserName}    {item.SubmitTime.ToString("yyyy-MM-dd")}   {item.Message} ");
-            }
+            var text = manager.GetCommitLog(Convert.ToDateTime("2019-02-11"), DateTime.Now).LogToText();
+            Console.WriteLine(text);
             Console.ReadKey();
         }
     }

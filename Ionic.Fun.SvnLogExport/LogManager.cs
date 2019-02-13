@@ -42,19 +42,18 @@ namespace Ionic.Fun.SvnLogExport
         /// <summary>
         /// 获取提交日志记录
         /// </summary>
-        /// <param name="url"></param>
-        /// <param name="startRevision"></param>
-        /// <param name="endRevision"></param>
-        public List<Model.MessageModel> GetCommitLog(DateTime startRevision, DateTime endRevision)
+        /// <param name="startTime">开始时间</param>
+        /// <param name="endTime">结束时间</param>
+        public List<Model.MessageModel> GetCommitLog(DateTime startTime, DateTime endTime)
         {
             List<Model.MessageModel> result = new List<Model.MessageModel>();
             foreach (var item in Config.Repositories)
             {
-                if (_client.GetLog(new Uri(item.Url), new SvnLogArgs(new SvnRevisionRange(new SvnRevision(startRevision) , new SvnRevision(endRevision))), out Collection<SvnLogEventArgs> logs))
+                if (_client.GetLog(new Uri(item.Url), new SvnLogArgs(new SvnRevisionRange(new SvnRevision(startTime) , new SvnRevision(endTime))), out Collection<SvnLogEventArgs> logs))
                 {
 
                     //后续操作，可以获取作者，版本号，提交时间，提交的message和提交文件列表等信息
-                    foreach (var log in logs.Where(x=>x.Author==Config.UserName&& !string.IsNullOrEmpty(x.LogMessage)))
+                    foreach (var log in logs.Where(x=>x.Author==Config.UserName&& !string.IsNullOrEmpty(x.LogMessage)).OrderByDescending(x=>x.Time))
                     {
                             result.Add(new Model.MessageModel
                             {
@@ -66,8 +65,7 @@ namespace Ionic.Fun.SvnLogExport
                     }
                 }
             }
-
-            return result.OrderByDescending(x => x.SubmitTime).ToList();
+            return result;
 
 
         }
