@@ -8,6 +8,11 @@ namespace Ionic.Fun.SvnLogExport
 {
    public static class Extends
     {
+        /// <summary>
+        /// 提取文字
+        /// </summary>
+        /// <param name="list">日志列表</param>
+        /// <returns></returns>
         public static string LogToText(this List<Model.MessageModel> list) {
             var sb = new StringBuilder();
             var nowName = "";
