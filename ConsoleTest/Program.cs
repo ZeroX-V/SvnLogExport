@@ -11,21 +11,28 @@ namespace ConsoleTest
     {
         static void Main(string[] args)
         {
-            Config.UserName = "svn账号";
-            Config.Password = "svn密码";
+            Config.UserName = "zl";
+            Config.Password = "123456";
            
             LogManager manager = new LogManager();
 
             //查找本地svn项目
-            //manager.FindLocalRepositories(@"F:\ProjectCode\SVNProject");
+            Config.Repositories= manager.FindLocalRepositories(@"F:\ProjectCode\SVNProject\SingleCode");
 
             //保存仓储地址到文件
             // manager.SaveRepositoriesToFile(Config.Repositories);
 
             //从配置文件中读取仓储地址
-            //manager.LoadRepositoriesToFile();
+           // Config.Repositories=manager.LoadRepositoriesToFile();
+            //Config.Repositories = new List<Model.RepositoriesModel>()
+            //{
+            //    new Model.RepositoriesModel{
+            //        Name="xx",
+            //        Url="https://192.168.0.14/svn/EjianFLowCqcppi/cqcppi"
+            //    }
+            //};
 
-            var text = manager.GetCommitLog(Convert.ToDateTime("2018-02-11"), DateTime.Now).LogToText();
+            var text = manager.GetCommitLog(Convert.ToDateTime("2019-02-01"), Convert.ToDateTime("2019-02-15")).LogToText();
             Console.WriteLine(text);
             Console.ReadKey();
         }

@@ -51,29 +51,38 @@ namespace Ionic.Fun.SvnLogExport
         {
             endTime = endTime.AddDays(1);
             List<Model.MessageModel> result = new List<Model.MessageModel>();
-            Collection<SvnLogEventArgs> logs;
+           
             foreach (var item in Config.Repositories)
             {
-                if (item.Url.StartsWith("https://"))
+                try
                 {
-                    _client.GetLog(new Uri(item.Url), new SvnLogArgs(new SvnRevisionRange(startTime, endTime)), out logs);
-                }
-                else
-                {
-                    _client.GetLog(item.Url, new SvnLogArgs(new SvnRevisionRange(startTime, endTime)), out logs);
-                }
-
-                //后续操作，可以获取作者，版本号，提交时间，提交的message和提交文件列表等信息
-                foreach (var log in logs.Where(x => x.Author == Config.UserName && !string.IsNullOrEmpty(x.LogMessage) && x.Time >= startTime && x.Time < endTime).OrderByDescending(x => x.Time))
-                {
-                    result.Add(new Model.MessageModel
+                    Collection<SvnLogEventArgs> logs;
+                    if (item.Url.StartsWith("https://"))
                     {
-                        UserName = log.Author,
-                        Message = log.LogMessage,
-                        SubmitTime = log.Time,
-                        Repositories = item
-                    });
+                        _client.GetLog(new Uri(item.Url), new SvnLogArgs(new SvnRevisionRange(startTime, endTime)), out logs);
+                    }
+                    else
+                    {
+                        _client.GetLog(item.Url, new SvnLogArgs(new SvnRevisionRange(startTime, endTime)), out logs);
+                    }
+
+                    //后续操作，可以获取作者，版本号，提交时间，提交的message和提交文件列表等信息
+                    foreach (var log in logs.Where(x => x.Author == Config.UserName && !string.IsNullOrEmpty(x.LogMessage) && x.Time >= startTime && x.Time < endTime).OrderByDescending(x => x.Time))
+                    {
+                        result.Add(new Model.MessageModel
+                        {
+                            UserName = log.Author,
+                            Message = log.LogMessage,
+                            SubmitTime = log.Time,
+                            Repositories = item
+                        });
+                    }
                 }
+                catch (Exception e)
+                {
+
+                }
+                
 
             }
             return result;
