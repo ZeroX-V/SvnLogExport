@@ -11,8 +11,8 @@ namespace ConsoleTest
     {
         static void Main(string[] args)
         {
-            Config.UserName = "zl";
-            Config.Password = "123456";
+            Config.UserName = "svn账号";
+            Config.Password = "svn密码";
            
             LogManager manager = new LogManager();
 

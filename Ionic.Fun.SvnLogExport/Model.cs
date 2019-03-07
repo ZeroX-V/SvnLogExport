@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SharpSvn.Implementation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,9 +15,11 @@ namespace Ionic.Fun.SvnLogExport
         {
             public string UserName { get; set; }
             public string Message { get; set; }
+            public long Revision { get; set; }
             public DateTime SubmitTime { get; set; }
             public RepositoriesModel Repositories { get; set; }
 
+            public SvnChangeItemCollection ChangedPaths { get; set; }
         }
 
 

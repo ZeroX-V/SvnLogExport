@@ -2,7 +2,7 @@
 
 ## 开始
 ```C#
-PM> Install-Package Ionic.Fun.SvnLogExport -Version 1.0.0
+PM> Install-Package Ionic.Fun.SvnLogExport
 ```
 ## 使用方法(代码在ConsoleTest里面)
 ```C#
