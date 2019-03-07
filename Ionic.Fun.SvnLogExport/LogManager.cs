@@ -49,9 +49,22 @@ namespace Ionic.Fun.SvnLogExport
         /// <param name="endTime">结束时间</param>
         public List<Model.MessageModel> GetCommitLog(DateTime startTime, DateTime endTime)
         {
+            return GetCommitAllLog(startTime, endTime).Where(x => string.IsNullOrEmpty(x.Message) && x.UserName == Config.UserName).ToList();
+
+
+        }
+
+        /// <summary>
+        /// 获取提交日志记录
+        /// </summary>
+        /// <param name="startTime">开始时间</param>
+        /// <param name="endTime">结束时间</param>
+        public List<Model.MessageModel> GetCommitAllLog(DateTime startTime, DateTime endTime)
+        {
+
             endTime = endTime.AddDays(1);
             List<Model.MessageModel> result = new List<Model.MessageModel>();
-           
+
             foreach (var item in Config.Repositories)
             {
                 try
@@ -66,9 +79,9 @@ namespace Ionic.Fun.SvnLogExport
                         _client.GetLog(item.Url, new SvnLogArgs(new SvnRevisionRange(startTime, endTime)), out logs);
                     }
 
-                 
+
                     //后续操作，可以获取作者，版本号，提交时间，提交的message和提交文件列表等信息
-                    foreach (var log in logs.Where(x => x.Author == Config.UserName && !string.IsNullOrEmpty(x.LogMessage) && x.Time >= startTime && x.Time < endTime).OrderByDescending(x => x.Time))
+                    foreach (var log in logs.Where(x => x.Time >= startTime && x.Time < endTime).OrderByDescending(x => x.Time))
                     {
                         result.Add(new Model.MessageModel
                         {
@@ -80,18 +93,17 @@ namespace Ionic.Fun.SvnLogExport
                             ChangedPaths = log.ChangedPaths
                         });
 
-                       
+
                     }
                 }
                 catch (Exception e)
                 {
-
+                    continue;
                 }
-                
+
 
             }
             return result;
-
 
         }
 
@@ -144,7 +156,8 @@ namespace Ionic.Fun.SvnLogExport
         public void SaveRepositoriesToFile(List<RepositoriesModel> list)
         {
             var saveDirectory = System.Threading.Thread.GetDomain().BaseDirectory + "config";
-            if (!Directory.Exists(saveDirectory)) {
+            if (!Directory.Exists(saveDirectory))
+            {
                 Directory.CreateDirectory(saveDirectory);
             }
             string configPath = saveDirectory + @"\RepositoriesList.json";
