@@ -49,13 +49,13 @@ namespace Ionic.Fun.SvnLogExport
         /// <param name="endTime">结束时间</param>
         public List<Model.MessageModel> GetCommitLog(DateTime startTime, DateTime endTime)
         {
-            return GetCommitAllLog(startTime, endTime).Where(x => string.IsNullOrEmpty(x.Message) && x.UserName == Config.UserName).ToList();
+            return GetCommitAllLog(startTime, endTime).Where(x => !string.IsNullOrEmpty(x.Message) && x.UserName == Config.UserName).ToList();
 
 
         }
 
         /// <summary>
-        /// 获取提交日志记录
+        /// 获取全部提交记录
         /// </summary>
         /// <param name="startTime">开始时间</param>
         /// <param name="endTime">结束时间</param>
@@ -67,6 +67,34 @@ namespace Ionic.Fun.SvnLogExport
 
             foreach (var item in Config.Repositories)
             {
+                try
+                {
+                    result.AddRange(GetCommitAllLog(item, startTime,endTime));
+                }
+                catch (Exception e)
+                {
+                    continue;
+                }
+
+
+            }
+            return result;
+
+        }
+
+
+        /// <summary>
+        /// 获取单个项目提交记录
+        /// </summary>
+        /// <param name="startTime">开始时间</param>
+        /// <param name="endTime">结束时间</param>
+        public List<Model.MessageModel> GetCommitAllLog(RepositoriesModel item,DateTime startTime, DateTime endTime)
+        {
+
+            endTime = endTime.AddDays(1);
+            List<Model.MessageModel> result = new List<Model.MessageModel>();
+
+           
                 try
                 {
                     Collection<SvnLogEventArgs> logs;
@@ -98,11 +126,9 @@ namespace Ionic.Fun.SvnLogExport
                 }
                 catch (Exception e)
                 {
-                    continue;
+                   
                 }
 
-
-            }
             return result;
 
         }
